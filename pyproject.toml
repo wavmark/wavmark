@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wavmark"
+version = "0.0.1"
+authors = [
+    { name = "Guangyu Chen (RUC)", email = "v-chenguangyu@outlook.com" },
+]
+description = "AI-Based Audio Watermarking Tool"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "tqdm", "librosa", "resampy", "huggingface_hub",
+    "torch<2.0",
+    "torchaudio<2.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/wavmark/wavmark"
+"Bug Tracker" = "https://github.com/wavmark/wavmark/issues"
