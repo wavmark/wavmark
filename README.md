@@ -5,6 +5,12 @@
 - 🙉 **High Imperceptibility:** The watermarked audio has over 38dB SNR and 4.3 PESQ, which means it is inaudible to humans. Listen to our demo: [https://wavmark.github.io/](https://wavmark.github.io/).
 - 😉 **Easy for Extending:** This project is entirely python based. You can easily leverage our underlying PyTorch model to implement a custom watermarking system with higher capacity and robustness.
 
+
+## Installation
+```
+pip install wavmark
+```
+
 ## Basic Usage
 The following code adds 16-bit watermark into the input file `example.wav` and subsequently performs decoding:
 ```python
@@ -46,7 +52,7 @@ print("Decode BER:%.1f" % BER)
 In paper [WavMark: Watermarking for Audio Generation](https://arxiv.org/pdf/2308.12770.pdf) we proposed the WavMark model,
 which enables encoding 32 bits of information into 1-second audio.
 In this tool, we take the first 16 bits as a fixed pattern for watermark identification and the remaining 16 bits as a custom payload.
-The watermark is added  iteratively into the host to ensure full-time region protection:
+The same watermark is added repetitively to ensure full-time region protection:
 ![Illustrate](data/imgs/structure.png)
 
 Since the pattern length is 16, the probability of "mistakenly identifying an unwatermarked audio as watermarked" is only  `1/(2^16)=0.000015`.
