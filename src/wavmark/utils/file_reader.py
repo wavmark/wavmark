@@ -10,7 +10,7 @@ def is_wav_file(filename):
     return file_extension.lower() == ".wav"
 
 
-def read_as_single_channel_16k(audio_file, def_sr, verbose=True, aim_second=None):
+def read_as_single_channel_16k(audio_file, def_sr=16000, verbose=True, aim_second=None):
     assert os.path.exists(audio_file)
 
     file_extension = os.path.splitext(audio_file)[1].lower()
