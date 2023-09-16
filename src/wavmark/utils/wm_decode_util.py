@@ -1,3 +1,5 @@
+# import pdb
+
 import torch
 import numpy as np
 import tqdm
@@ -14,11 +16,13 @@ def decode_trunck(trunck, model, device):
 
 def extract_watermark_v3_batch(data, start_bit, shift_range, num_point, model, device, batch_size=10,
                                shift_range_p=0.5, show_progress=False):
+    assert type(show_progress) == bool
     start_time = time.time()
     # 1.determine the shift step length:
     shift_step = int(shift_range * num_point * shift_range_p)
 
     # 2.determine where to perform detection
+    # pdb.set_trace()
     total_detections = (len(data) - num_point) // shift_step
     total_detect_points = [i * shift_step for i in range(total_detections)]
 
@@ -62,7 +66,6 @@ def extract_watermark_v3_batch(data, start_bit, shift_range, num_point, model, d
 
     if len(results) == 0:
         return None, info
-
 
     results_1 = [i["msg"] for i in results if np.isclose(i["sim"], 1.0)]
     mean_result = (np.array(results_1).mean(axis=0) >= 0.5).astype(int)

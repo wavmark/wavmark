@@ -28,7 +28,7 @@ def encode_watermark(model, signal, payload, pattern_bit_length=16, min_snr=20, 
     assert len(watermark) == 32
     signal_wmd, info = wm_add_util.add_watermark(watermark, signal, 16000, 0.1,
                                                  device, model, min_snr, max_snr,
-                                                 show_progress)
+                                                 show_progress=show_progress)
     info["snr"] = metric_util.signal_noise_ratio(signal, signal_wmd)
     return signal_wmd, info
 
@@ -42,7 +42,7 @@ def decode_watermark(model, signal, decode_batch_size=10, len_start_bit=16, show
         0.1,
         16000,
         model,
-        device, decode_batch_size, show_progress)
+        device, decode_batch_size, show_progress=show_progress)
 
     if mean_result is None:
         return None, info
