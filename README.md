@@ -42,7 +42,7 @@ watermarked_signal, _ = wavmark.encode_watermark(model, signal, payload, show_pr
 
 # 5.decode watermark
 payload_decoded, _ = wavmark.decode_watermark(model, watermarked_signal, show_progress=True)
-BER = 100 * (1 - (payload == payload_decoded).mean())
+BER = (payload != payload_decoded).mean() * 100
 
 print("Decode BER:%.1f" % BER)
 ```
@@ -56,6 +56,44 @@ The same watermark is added repetitively to ensure full-time region protection:
 ![Illustrate](data/imgs/structure.png)
 
 Since the pattern length is 16, the probability of "mistakenly identifying an unwatermarked audio as watermarked" is only  `1/(2^16)=0.000015`.
+
+
+
+## Low-level API
+For a  watermarking algorithm, there exists a trade-off among its capacity, robustness, and imperceptibility. 
+Therefore, watermarking system often needs customization according to actual application requirements.
+The good news is that WavMark is **entirely implemented with PyTorch**. 
+You can leverage the PyTorch model to construct your own watermarking system. 
+Here is an example of directly calling the PyTorch model:
+
+```python
+# 1.load model
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+model = wavmark.load_model().to(device)
+
+# 2. take 16,000 samples
+signal, sample_rate = soundfile.read("example.wav")
+trunck = signal[0:16000]
+message_npy = np.random.choice([0, 1], size=32)
+
+# 3. do encode:
+with torch.no_grad():
+    signal = torch.FloatTensor(trunck).to(device)[None]
+    message_tensor = torch.FloatTensor(message_npy).to(device)[None]
+    signal_wmd_tensor = model.encode(signal, message_tensor)
+    signal_wmd_npy = signal_wmd_tensor.detach().cpu().numpy().squeeze()
+
+# 4.do decode:
+with torch.no_grad():
+    signal = torch.FloatTensor(signal_wmd_npy).to(device).unsqueeze(0)
+    message_decoded_npy = (model.decode(signal) >= 0.5).int().detach().cpu().numpy().squeeze()
+
+BER = (message_npy != message_decoded_npy).mean() * 100
+print("BER:", BER)
+```
+
+
+
 
 
 ## Thanks

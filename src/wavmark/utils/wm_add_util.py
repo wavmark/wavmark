@@ -5,7 +5,7 @@ import tqdm
 import time
 
 # The pattern bits can be any random sequence.
-# Don't use all-zeros, all-ones, or any periodic sequence, which will seriously hurt decoding performance.
+# But don't use all-zeros, all-ones, or any periodic sequence, which will seriously hurt decoding performance.
 fix_pattern = [1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0,
                0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1,
                1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1,
