@@ -2,9 +2,9 @@
 > AI-based Audio Watermarking Tool
 
 - ⚡  **Leading Stability:** The watermark resist to **10**  types of common attacks like Gaussian noise, MP3 compression, low-pass filter, and speed variation; achieving over **29** times in robustness compared with the traditional method.
-- 🙉 **High Imperceptibility:** The watermarked audio has over 38dB SNR and 4.3 PESQ, which means it is inaudible to humans. Listen the watermarked audio: [https://wavmark.github.io/](https://wavmark.github.io/).
-- 😉 **Easy for Extending:** This project is entirely python based. You can easily leverage our underlying PyTorch model to implement a custom watermarking system with higher capacity and robustness.
-- 🤗 **Huggingface Online Demo:** https://huggingface.co/spaces/M4869/WavMark
+- 🙉 **High Imperceptibility:** The watermarked audio has over 38dB SNR and 4.3 PESQ, which means it is inaudible to humans. Listen the examples: [https://wavmark.github.io/](https://wavmark.github.io/).
+- 😉 **Easy for Extending:** This project is entirely python based. You can easily leverage our underlying PyTorch model to implement a custom watermarking system with higher capacity or robustness.
+- 🤗 **Huggingface Spaces:**  Try our online demonstration: https://huggingface.co/spaces/M4869/WavMark
 
 ## Installation
 ```
