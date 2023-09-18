@@ -1,7 +1,7 @@
 # WavMark
 > AI-based Audio Watermarking Tool
 
-- ⚡  **Leading Stability:** The watermark resist to **10**  types of common attacks like Gaussian noise, MP3 compression, high-pass filter, and speed variation; achieving over **29** times in robustness compared with the traditional method.
+- ⚡  **Leading Stability:** The watermark resist to **10**  types of common attacks like Gaussian noise, MP3 compression, low-pass filter, and speed variation; achieving over **29** times in robustness compared with the traditional method.
 - 🙉 **High Imperceptibility:** The watermarked audio has over 38dB SNR and 4.3 PESQ, which means it is inaudible to humans. Listen the watermarked audio: [https://wavmark.github.io/](https://wavmark.github.io/).
 - 😉 **Easy for Extending:** This project is entirely python based. You can easily leverage our underlying PyTorch model to implement a custom watermarking system with higher capacity and robustness.
 - 🤗 **Huggingface Online Demo:** https://huggingface.co/spaces/M4869/WavMark
@@ -59,11 +59,10 @@ Since the pattern length is 16, the probability of "mistakenly identifying an un
 
 
 
-## Low-level API
-For a  watermarking algorithm, there exists a trade-off among its capacity, robustness, and imperceptibility. 
-Therefore, watermarking system often needs customization according to actual application requirements.
-The good news is that WavMark is **entirely implemented with PyTorch**. 
-You can leverage the PyTorch model to construct your own watermarking system. 
+## Low-level Access
+For a specific watermarking algorithm, there exists a trade-off among capacity, robustness, and imperceptibility. 
+Therefore, a watermarking system often needs customization according to application requirements.
+The good news is that WavMark is entirely implemented with PyTorch. 
 Here is an example of directly calling the PyTorch model:
 
 ```python
