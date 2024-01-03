@@ -22,7 +22,7 @@ class Model(nn.Module):
 
     def istft(self, signal_wmd_fft):
         window = torch.hann_window(self.n_fft).to(signal_wmd_fft.device)
-        return torch.istft(signal_wmd_fft, n_fft=self.n_fft, hop_length=self.hop_length, window=window,
+        return torch.istft(torch.view_as_complex(signal_wmd_fft), n_fft=self.n_fft, hop_length=self.hop_length, window=window,
                            return_complex=False)
 
     def encode(self, signal, message):
