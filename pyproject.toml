@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "wavmark"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
     { name = "Guangyu Chen (RUC)", email = "v-chenguangyu@outlook.com" },
 ]
@@ -18,8 +18,8 @@ classifiers = [
 ]
 dependencies = [
     "tqdm", "librosa", "resampy", "huggingface_hub",
-    "torch<2.0",
-    "torchaudio<2.0",
+    "torch",
+    "torchaudio",
 ]
 
 [project.urls]

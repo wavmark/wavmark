@@ -16,14 +16,18 @@ class Model(nn.Module):
 
     def stft(self, data):
         window = torch.hann_window(self.n_fft).to(data.device)
-        tmp = torch.stft(data, n_fft=self.n_fft, hop_length=self.hop_length, window=window, return_complex=False)
+        # torch: return_complex=False is deprecDeprecated since version 2.0: return_complex=False is deprecated,
+        # instead use return_complex=True Note that calling torch.view_as_real() on the output will recover the deprecated output format.
+        tmp = torch.stft(data, n_fft=self.n_fft, hop_length=self.hop_length, window=window, return_complex=True)
+        tmp = torch.view_as_real(tmp)
         # [1, 501, 41, 2]
         return tmp
 
     def istft(self, signal_wmd_fft):
         window = torch.hann_window(self.n_fft).to(signal_wmd_fft.device)
-        return torch.istft(signal_wmd_fft, n_fft=self.n_fft, hop_length=self.hop_length, window=window,
-                           return_complex=False)
+        # torch: return_complex=False is deprecDeprecated since version 2.0: return_complex=False is deprecated,
+        # instead use return_complex=True Note that calling torch.view_as_real() on the output will recover the deprecated output format.
+        return torch.istft(torch.view_as_complex(signal_wmd_fft), n_fft=self.n_fft, hop_length=self.hop_length, window=window, return_complex=False)
 
     def encode(self, signal, message):
         signal_fft = self.stft(signal)
