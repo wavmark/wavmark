@@ -10,7 +10,8 @@ def load_model(path="default"):
         resume_path = hf_hub_download(repo_id="M4869/WavMark",
                                       filename="step59000_snr39.99_pesq4.35_BERP_none0.30_mean1.81_std1.81.model.pkl",
                                       )
-
+    else:
+        resume_path = path
     model = my_model.Model(16000, num_bit=32, n_fft=1000, hop_length=400, num_layers=8)
     checkpoint = torch.load(resume_path, map_location=torch.device('cpu'))
     model_ckpt = checkpoint
